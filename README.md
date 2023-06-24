@@ -15,3 +15,11 @@ Repository to learn and explore website using Github Pages
 ### Start application in development mode
 
     npm run dev
+
+### Generate production build
+
+    npm run build
+
+### Start production build
+
+    npm run serve

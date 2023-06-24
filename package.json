@@ -2,8 +2,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "serve": "serve --listen ${PORT:-3000} ${SERVE_DIR:-out}"
   },
   "dependencies": {
     "next": "^13.4.7",
@@ -13,7 +13,8 @@
   "devDependencies": {
     "@types/node": "20.3.1",
     "@types/react": "18.2.13",
-    "typescript": "5.1.3"
+    "typescript": "5.1.3",
+    "serve": "14.2.0"
   },
   "engines": {
     "node": ">=20.3.1"
