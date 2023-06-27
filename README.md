@@ -23,3 +23,13 @@ Repository to learn and explore website using Github Pages
 ### Start production build
 
     npm run serve
+
+### Run unit tests
+
+Watch mode
+
+    npm run test
+
+CI mode
+
+    npm run test:ci
