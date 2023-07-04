@@ -5,7 +5,7 @@ export default function Page() {
     <h1>
       <div>Hello, Next.js!</div>
       <div>
-        <Link href="/time">Time</Link>
+        <Link data-testid="time-link" href="/time">Time</Link>
       </div>
       </h1>
   );

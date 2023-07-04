@@ -33,3 +33,13 @@ Watch mode
 CI mode
 
     npm run test:ci
+
+### Run e2e tests
+
+Watch mode
+
+    npm run e2e
+
+CI mode
+
+    npm run e2e:ci
