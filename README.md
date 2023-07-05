@@ -43,3 +43,7 @@ Watch mode
 CI mode
 
     npm run e2e:ci
+
+### Run all tests and generate build artifact
+
+    npm run all
