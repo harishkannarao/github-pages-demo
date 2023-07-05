@@ -1,6 +1,6 @@
 describe('Current Time Page', () => {
     it('should navigate to time page and verify time', () => {
-        cy.visit('http://localhost:3000/')
+        cy.visit(Cypress.env('host'))
 
         cy.get('a[data-testid="time-link"]')
             .should('have.length', 1)

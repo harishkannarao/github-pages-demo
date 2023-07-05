@@ -47,3 +47,9 @@ CI mode
 ### Run all tests and generate build artifact
 
     npm run all
+
+### Change port for dev and testing
+
+    export PORT=4000
+
+    npm run all
