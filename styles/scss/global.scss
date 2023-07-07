@@ -1,5 +1,5 @@
 $theme-colors: (
-  'primary': #dbb68c,
+  'primary': #b8d1f4,
   'secondary': #833bec,
   'success': #1ce1ac,
   'info': #ff7d50,
@@ -9,8 +9,6 @@ $theme-colors: (
   'dark': #001738,
 );
 
-$badge-color: #cbe0dc;
-
-$body-bg: #949fdd;
+$body-bg: #f6f2f5;
 
 @import "/node_modules/bootstrap/scss/bootstrap";
