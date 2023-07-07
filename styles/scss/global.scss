@@ -1,0 +1,16 @@
+$theme-colors: (
+  'primary': #dbb68c,
+  'secondary': #833bec,
+  'success': #1ce1ac,
+  'info': #ff7d50,
+  'warning': #ffbe0b,
+  'danger': #ff007f,
+  'light': #c0ccda,
+  'dark': #001738,
+);
+
+$badge-color: #cbe0dc;
+
+$body-bg: #949fdd;
+
+@import "/node_modules/bootstrap/scss/bootstrap";
