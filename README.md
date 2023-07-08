@@ -10,6 +10,10 @@ Repository to learn and explore website using Github Pages
 
 ### Install node modules
 
+    npm ci
+
+or
+
     npm install
 
 ### Start application in development mode
