@@ -1,3 +1,5 @@
+'use client';
+
 // These styles apply to every route in the application
 import '../styles/scss/global.scss';
 
