@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "postinstall": "npx next telemetry disable",
     "dev": "next dev -p ${PORT:-3000}",
     "build": "next build",
     "lint": "next lint",
