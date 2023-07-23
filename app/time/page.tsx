@@ -1,6 +1,8 @@
 'use client';
 
-import { CurrentTime } from "../../components/time/time";
+import dynamic from 'next/dynamic';
+
+const CurrentTime = dynamic(() => import('../../components/time/time').then((mod) => mod.CurrentTime), { ssr: false });
 
 export default function Page() {
     return (
