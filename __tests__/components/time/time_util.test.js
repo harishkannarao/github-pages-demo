@@ -8,4 +8,12 @@ describe('time_util', () => {
         expect(result.valueOf()).toBeGreaterThanOrEqual(reference_start_time.valueOf());
         expect(result.valueOf()).toBeLessThanOrEqual(reference_end_time.valueOf());
     })
+
+    it('returns current time as async', async () => {
+        const reference_start_time = new Date();
+        const result = await timeModule.asyncCurrentTime();
+        const reference_end_time = new Date();
+        expect(result.valueOf()).toBeGreaterThanOrEqual(reference_start_time.valueOf());
+        expect(result.valueOf()).toBeLessThanOrEqual(reference_end_time.valueOf());
+    })
 })
