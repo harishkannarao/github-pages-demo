@@ -11,4 +11,8 @@ $theme-colors: (
 
 $body-bg: #f6f2f5;
 
+.description {
+  background-color: lavender;
+}
+
 @import "/node_modules/bootstrap/scss/bootstrap";
