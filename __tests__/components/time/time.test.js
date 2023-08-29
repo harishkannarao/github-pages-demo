@@ -7,13 +7,14 @@ import { usePathname } from "next/navigation";
 jest.mock('../../../components/time/time_util')
 jest.mock('next/navigation', () => {
     return {
-        usePathname: jest.fn(() => 'default')
+        usePathname: jest.fn()
     }
 })
 
 describe('time', () => {
     beforeEach(() => {
         timeModule.currentTime = jest.fn();
+        usePathname.mockReturnValue('/default/');
     });
 
     it('renders pathname', async () => {
