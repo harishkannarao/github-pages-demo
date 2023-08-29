@@ -2,14 +2,16 @@
 
 import * as timeModule from "./time_util";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 
 export function CurrentTime() {
     const [date, setDate] = useState(undefined);
+    const pathname = usePathname();
 
     useEffect(() => {
         loadDate();
-        return () => {};
+        return () => { };
     }, []);
 
     async function loadDate() {
@@ -26,6 +28,12 @@ export function CurrentTime() {
     }
 
     return (
-        <span>{createDate()}</span>
+        <div>
+            <span>{createDate()}</span>
+            <br />
+            <br />
+            <br />
+            <span>Path: <span data-testid="path-name">{pathname}</span></span>
+        </div>
     );
 }

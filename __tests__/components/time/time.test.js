@@ -1,14 +1,30 @@
-import { AsyncCurrentTime, CurrentTime } from "../../../components/time/time"
+import { CurrentTime } from "../../../components/time/time"
 import * as timeModule from "../../../components/time/time_util"
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { usePathname } from "next/navigation";
 
 jest.mock('../../../components/time/time_util')
+jest.mock('next/navigation', () => {
+    return {
+        usePathname: jest.fn(() => 'default')
+    }
+})
 
 describe('time', () => {
     beforeEach(() => {
         timeModule.currentTime = jest.fn();
     });
+
+    it('renders pathname', async () => {
+        usePathname.mockReturnValue('/example/');
+        render(
+            <CurrentTime />
+        )
+        const pathName = screen.queryByTestId('path-name');
+        screen.debug();
+        expect(pathName.textContent).toBe('/example/');
+    })
 
     it('renders CurrentTime', async () => {
         const aDate = new Date('2023-07-03T20:44:40.985Z');
