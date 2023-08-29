@@ -12,6 +12,9 @@ export default function Page() {
       <h3>
         <div>
           <Link data-testid="time-link" href="/time">Time</Link>
+          <br />
+          <Link data-testid="dynamic-title-link" href="/dynamic-title">Dynamic Title</Link>
+          <br />
           <h6><Badge pill bg="secondary">New</Badge></h6>
         </div>
       </h3>
