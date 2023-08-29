@@ -13,6 +13,7 @@ jest.mock('next/navigation', () => {
 
 describe('time', () => {
     beforeEach(() => {
+        jest.clearAllMocks();
         timeModule.currentTime = jest.fn();
         usePathname.mockReturnValue('/default/');
     });
