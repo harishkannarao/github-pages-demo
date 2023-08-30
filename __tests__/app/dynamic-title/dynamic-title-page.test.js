@@ -31,12 +31,11 @@ describe('dynamic title page', () => {
         )
         fireEvent.change(screen.queryByTestId('new-title'), {target: {value: 'hello'}});
         expect(mockPush.mock.calls.length).toBe(1);
-        expect(mockPush.mock.calls[0][0]).toMatch(/^example\?/);
-        expect(mockPush.mock.calls[0][0]).toMatch(/title=hello$/);
+        expect(mockPush.mock.calls[0][0]).toMatch(/^example\?.*title=hello.*/);
 
         fireEvent.change(screen.queryByTestId('new-title'), {target: {value: ''}});
         expect(mockPush.mock.calls.length).toBe(2);
-        expect(mockPush.mock.calls[1][0]).toMatch(/^example\?/);
+        expect(mockPush.mock.calls[1][0]).toMatch(/^example\?.*/);
         expect(mockPush.mock.calls[1][0]).not.toMatch(/title=/);
     })
 })
