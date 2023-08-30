@@ -11,8 +11,11 @@ export default function Page() {
   // searchParams with a provided key/value pair
   function createQueryString(name: string, value: string) {
     const params = new URLSearchParams(searchParams)
-    params.set(name, value)
-
+    if (value) {
+      params.set(name, value)
+    } else {
+      params.delete(name)
+    }
     return params.toString()
   }
 
@@ -23,8 +26,9 @@ export default function Page() {
   return (
     <div className='text-center'>
       <label>
-        First name:
+        New Title:
         <input
+          data-testid="new-title"
           value={searchParams.get('title')}
           onChange={e => updateTitle(e.target.value)}
         />

@@ -24,7 +24,6 @@ describe('time', () => {
             <CurrentTime />
         )
         const pathName = screen.queryByTestId('path-name');
-        screen.debug();
         expect(pathName.textContent).toBe('/example/');
     })
 
