@@ -10,7 +10,7 @@ export default function Page() {
   // Get a new searchParams string by merging the current
   // searchParams with a provided key/value pair
   function createQueryString(name: string, value: string) {
-    const params = new URLSearchParams(searchParams)
+    const params = new URLSearchParams(searchParams.toString())
     if (value) {
       params.set(name, value)
     } else {
