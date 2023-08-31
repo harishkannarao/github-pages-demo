@@ -28,12 +28,12 @@ export function CurrentTime() {
     }
 
     return (
-        <div>
+        <>
             <span>{createDate()}</span>
             <br />
             <br />
             <br />
             <span>Path: <span data-testid="path-name">{pathname}</span></span>
-        </div>
+        </>
     );
 }
