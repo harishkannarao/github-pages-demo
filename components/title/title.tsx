@@ -1,12 +1,24 @@
 'use client';
 
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useParams } from "next/navigation";
 
 export function Title() {
     const searchParams = useSearchParams();
     const titleQuery = searchParams.get('title');
-    const title = titleQuery ? titleQuery : 'My Sample Site';
+    const params = useParams();
+    const canonicalName = params ? params.canonicalName : undefined;
+
+    function getTitle() {
+        if (canonicalName) {
+            return canonicalName;
+        } else if (titleQuery) {
+            return titleQuery;
+        } else {
+            return 'My Sample Site';
+        }
+    }
+    
     return (
-        <title data-testid="title">{title}</title>
+        <title data-testid="title">{getTitle()}</title>
     )
 }
