@@ -3,18 +3,21 @@
 // These styles apply to every route in the application
 import '../styles/scss/global.scss';
 import { Title } from '../components/title/title';
+import { TitleContextProvider } from '../components/title/title_context';
 
 export default function RootLayout({
-    children,
-  }: {
-    children: React.ReactNode
-  }) {
-    return (
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <TitleContextProvider>
       <html lang="en">
         <head>
           <Title />
         </head>
         <body className="container">{children}</body>
       </html>
-    )
-  }
+    </TitleContextProvider>
+  )
+}
