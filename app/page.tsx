@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import Badge from 'react-bootstrap/Badge';
 
 export default function Page() {
@@ -12,9 +11,9 @@ export default function Page() {
         </h1>
         <h3>
           <div>
-            <Link data-testid="time-link" href="/time">Time</Link>
+            <a data-testid="time-link" href="/time">Time</a>
             <br />
-            <Link data-testid="dynamic-title-link" href="/dynamic-title">Dynamic Title</Link>
+            <a data-testid="dynamic-title-link" href="/dynamic-title">Dynamic Title</a>
             <br />
             <h6><Badge pill bg="secondary">New</Badge></h6>
           </div>

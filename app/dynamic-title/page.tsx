@@ -23,13 +23,17 @@ export default function Page() {
     router.push(pathname + '?' + createQueryString('title', value))
   }
 
+  function getTitle(value: string | null | undefined) {
+    return value ? value : '';
+  }
+
   return (
     <div className='text-center'>
       <label>
         New Title:
         <input
           data-testid="new-title"
-          value={searchParams.get('title')}
+          value={getTitle(searchParams.get('title'))}
           onChange={e => updateTitle(e.target.value)}
         />
       </label>
