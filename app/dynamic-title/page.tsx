@@ -1,11 +1,13 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useTitleContext } from '../../components/title/title_context';
 
 export default function Page() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const titleContext = useTitleContext();
 
   // Get a new searchParams string by merging the current
   // searchParams with a provided key/value pair
@@ -29,14 +31,26 @@ export default function Page() {
 
   return (
     <div className='text-center'>
-      <label>
-        New Title:
-        <input
-          data-testid="new-title"
-          value={getTitle(searchParams.get('title'))}
-          onChange={e => updateTitle(e.target.value)}
-        />
-      </label>
+      <div>
+        <label>
+          Title through Query:
+          <input
+            data-testid="new-title-query"
+            value={getTitle(searchParams.get('title'))}
+            onChange={e => updateTitle(e.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Title through Context:
+          <input
+            data-testid="new-title-context"
+            value={getTitle(titleContext.title)}
+            onChange={e => titleContext.setTitle(e.target.value)}
+          />
+        </label>
+      </div>
     </div>
   );
 }

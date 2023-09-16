@@ -20,9 +20,21 @@ jest.mock('next/navigation', () => {
     }
 })
 
+let contextTitle = undefined;
+const setContextTitle = jest.fn();
+jest.mock('../../../components/title/title_context', () => {
+    return {
+        useTitleContext: jest.fn(() => ({
+            title: contextTitle,
+            setTitle: setContextTitle
+        }))
+    }
+})
+
 describe('dynamic title page', () => {
     beforeEach(() => {
         jest.clearAllMocks();
+        contextTitle = undefined;
         usePathname.mockReturnValue('default');
     });
 
@@ -32,7 +44,7 @@ describe('dynamic title page', () => {
         render(
             <Page />
         )
-        fireEvent.change(screen.queryByTestId('new-title'), {target: {value: 'hello'}});
+        fireEvent.change(screen.queryByTestId('new-title-query'), {target: {value: 'hello'}});
         expect(mockPush.mock.calls).toHaveLength(1);
         expect(mockPush.mock.calls[0][0]).toBe('example?user=abc&query=xyz&title=hello');
     })
@@ -44,11 +56,22 @@ describe('dynamic title page', () => {
         render(
             <Page />
         )
-        fireEvent.change(screen.queryByTestId('new-title'), {target: {value: ''}});
+        fireEvent.change(screen.queryByTestId('new-title-query'), {target: {value: ''}});
         expect(mockGet.mock.calls).toHaveLength(1);
         expect(mockGet.mock.calls[0][0]).toBe('title');
         expect(mockPush.mock.calls).toHaveLength(1);
         expect(mockPush.mock.calls[0][0]).toBe('example?user=abc&query=xyz');
+    })
+
+    it('set the title context on input change', async () => {
+        contextTitle = 'some context title';
+        render(
+            <Page />
+        )
+        expect(screen.queryByTestId('new-title-context').value).toBe('some context title');
+        fireEvent.change(screen.queryByTestId('new-title-context'), {target: {value: 'hello'}});
+        expect(setContextTitle.mock.calls).toHaveLength(1);
+        expect(setContextTitle.mock.calls[0][0]).toBe('hello');
     })
 })
 

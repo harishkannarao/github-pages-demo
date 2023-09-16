@@ -14,9 +14,21 @@ jest.mock('next/navigation', () => {
     }
 })
 
+let contextTitle = undefined;
+const setContextTitle = jest.fn();
+jest.mock('../../../components/title/title_context', () => {
+    return {
+        useTitleContext: jest.fn(() => ({
+            title: contextTitle,
+            setTitle: setContextTitle
+        }))
+    }
+})
+
 describe('time', () => {
     beforeEach(() => {
         jest.clearAllMocks();
+        contextTitle = undefined;
         mockGet.mockReturnValue(undefined);
         useParams.mockReturnValue(undefined);
     });
@@ -75,6 +87,19 @@ describe('time', () => {
         )
         const pathName = screen.queryByTestId('title');
         expect(pathName.textContent).toBe('xyz');
+
+        expect(mockGet.mock.calls.length).toBe(1);
+        expect(mockGet.mock.calls[0][0]).toBe('title');
+    })
+
+    it('renders title from context', async () => {
+        contextTitle = 'context title'
+
+        render(
+            <Title />
+        )
+        const pathName = screen.queryByTestId('title');
+        expect(pathName.textContent).toBe('context title');
 
         expect(mockGet.mock.calls.length).toBe(1);
         expect(mockGet.mock.calls[0][0]).toBe('title');
