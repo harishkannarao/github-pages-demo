@@ -28,6 +28,10 @@ or
 
     npm run serve
 
+### Generate production build and start using single command
+
+    npm run build_serve
+
 ### Run unit tests
 
 Watch mode
