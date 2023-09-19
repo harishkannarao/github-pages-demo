@@ -13,14 +13,18 @@ export function ThemeChanger() {
     }, [])
 
     if (!mounted) {
-        return null
+        return (
+            <select disabled data-testid='theme-changer-loading'>
+                <option value="loading">Loading</option>
+            </select>
+        )
+    } else {
+        return (
+            <select data-testid='theme-changer' value={theme} onChange={e => setTheme(e.target.value)}>
+                <option value="system">System</option>
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+            </select>
+        )
     }
-
-    return (
-        <select data-testid='theme-changer' value={theme} onChange={e => setTheme(e.target.value)}>
-            <option value="system">System</option>
-            <option value="dark">Dark</option>
-            <option value="light">Light</option>
-        </select>
-    )
 }
