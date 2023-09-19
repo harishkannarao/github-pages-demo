@@ -7,8 +7,8 @@ export function BasketAction() {
 
     return (
         <div>
-            <button onClick={() => basketContext.doIncrease()}>Increase</button>
-            <button onClick={() => basketContext.doDecrease()}>Decrease</button>
+            <button data-testid='increase' onClick={() => basketContext.doIncrease()}>Increase</button>
+            <button data-testid='decrease' onClick={() => basketContext.doDecrease()}>Decrease</button>
         </div>
     )
 }
