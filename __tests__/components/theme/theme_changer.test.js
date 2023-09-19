@@ -40,5 +40,9 @@ describe('theme changer', () => {
         fireEvent.change(screen.queryByTestId('theme-changer'), { target: { value: 'system' } })
         expect(mockSetTheme.mock.calls).toHaveLength(2);
         expect(mockSetTheme.mock.calls[1][0]).toBe('system')
+
+        fireEvent.change(screen.queryByTestId('theme-changer'), { target: { value: 'light' } })
+        expect(mockSetTheme.mock.calls).toHaveLength(3);
+        expect(mockSetTheme.mock.calls[2][0]).toBe('light')
     })
 })
