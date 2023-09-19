@@ -15,6 +15,9 @@ export function CustomNav() {
             <Nav.Item>
                 <Nav.Link as={Link} href="/dynamic-title" data-testid='dynamic-title-link'>Dynamic Title</Nav.Link>
             </Nav.Item>
+            <Nav.Item>
+                <Nav.Link as={Link} href="/context" data-testid='context-link'>Context</Nav.Link>
+            </Nav.Item>
         </Nav>
     );
 }

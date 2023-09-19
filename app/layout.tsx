@@ -7,6 +7,7 @@ import { TitleContextProvider } from '../components/title/title_context';
 import { CustomThemeProviders } from '../components/theme/custom_theme_provider';
 import { ThemeChanger } from '../components/theme/theme_changer';
 import { CustomNav } from '../components/nav/nav';
+import { BasketContextProvider } from '../components/basket/basket_context';
 
 export default function RootLayout({
   children,
@@ -15,20 +16,22 @@ export default function RootLayout({
 }) {
   return (
     <TitleContextProvider>
-      <html lang="en" suppressHydrationWarning>
-        <head>
-          <Title />
-        </head>
-        <body className="container">
-          <CustomThemeProviders>
-            <CustomNav />
-            {children}
-            <div>
-              <ThemeChanger />
-            </div>
-          </CustomThemeProviders>
-        </body>
-      </html>
+      <BasketContextProvider>
+        <html lang="en" suppressHydrationWarning>
+          <head>
+            <Title />
+          </head>
+          <body className="container">
+            <CustomThemeProviders>
+              <CustomNav />
+              {children}
+              <div>
+                <ThemeChanger />
+              </div>
+            </CustomThemeProviders>
+          </body>
+        </html>
+      </BasketContextProvider>
     </TitleContextProvider>
   )
 }
