@@ -15,9 +15,9 @@ export function ThemeChanger() {
     if (mounted) {
         return (
             <select data-testid='theme-changer' value={theme} onChange={e => setTheme(e.target.value)}>
-                <option value="system">System</option>
-                <option value="dark">Dark</option>
-                <option value="light">Light</option>
+                <option data-testid='theme-changer-system' value="system">System</option>
+                <option data-testid='theme-changer-dark' value="dark">Dark</option>
+                <option data-testid='theme-changer-light' value="light">Light</option>
             </select>
         );
     } else {
