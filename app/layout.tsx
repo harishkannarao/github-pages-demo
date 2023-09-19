@@ -4,6 +4,8 @@
 import '../styles/scss/global.scss';
 import { Title } from '../components/title/title';
 import { TitleContextProvider } from '../components/title/title_context';
+import { CustomThemeProviders } from '../components/theme/custom_theme_provider';
+import { ThemeChanger } from '../components/theme/theme_changer';
 
 export default function RootLayout({
   children,
@@ -12,11 +14,18 @@ export default function RootLayout({
 }) {
   return (
     <TitleContextProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <head>
           <Title />
         </head>
-        <body className="container">{children}</body>
+        <body className="container">
+          <CustomThemeProviders>
+            {children}
+            <div>
+              <ThemeChanger />
+            </div>
+          </CustomThemeProviders>
+        </body>
       </html>
     </TitleContextProvider>
   )
