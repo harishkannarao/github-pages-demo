@@ -3,7 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useTitleContext } from '../../components/title/title_context';
 
-export default function Page() {
+export default function TitlePage() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

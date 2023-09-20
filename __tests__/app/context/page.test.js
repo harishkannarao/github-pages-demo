@@ -1,13 +1,13 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { BasketContextProvider } from '../../../components/basket/basket_context';
-import Page from '../../../app/context/page';
+import ContextPage from '../../../app/context/page';
 
 
-function createComponentWithBasketContext() {
+function createComponentWithProviders() {
     return (
         <BasketContextProvider>
-            <Page></Page>
+            <ContextPage></ContextPage>
         </BasketContextProvider>
     )
 }
@@ -15,7 +15,7 @@ function createComponentWithBasketContext() {
 describe('Context Page', () => {
     it('increase and decrease basket count', async () => {
         render(
-            createComponentWithBasketContext()
+            createComponentWithProviders()
         )
         expect(screen.queryByTestId('basket-count').textContent).toBe('0');
         fireEvent.click(screen.queryByTestId('increase'));
@@ -30,7 +30,7 @@ describe('Context Page', () => {
 
     it('decrease does not reduce basket count below 0', async () => {
         render(
-            createComponentWithBasketContext()
+            createComponentWithProviders()
         )
         expect(screen.queryByTestId('basket-count').textContent).toBe('0');
         fireEvent.click(screen.queryByTestId('decrease'));

@@ -1,6 +1,6 @@
 'use client';
 
-export default function Page({ params }: { params: { productId: string, canonicalName: string } }) {
+export default function RoutePage({ params }: { params: { productId: string, canonicalName: string } }) {
     return(
         <>
             <div>
