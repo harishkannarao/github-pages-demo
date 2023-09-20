@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { BasketContextProvider, useBasketContext } from '../../../components/basket/basket_context';
+import { BasketContextProvider } from '../../../components/basket/basket_context';
 import { Basket } from '../../../components/basket/basket';
 import { BasketAction } from '../../../components/basket/basket_action';
 
