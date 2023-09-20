@@ -1,5 +1,3 @@
-'use client';
-
 import { CurrentTime } from "../../components/time/time";
 
 export default function TimePage() {

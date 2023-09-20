@@ -1,8 +1,7 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
+import ContextPage from '../../../app/context/context_page';
 import { BasketContextProvider } from '../../../components/basket/basket_context';
-import ContextPage from '../../../app/context/page';
-
 
 function createComponentWithProviders() {
     return (

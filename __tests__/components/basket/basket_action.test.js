@@ -2,11 +2,15 @@ import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { BasketAction } from '../../../components/basket/basket_action';
 
+let mockCount = 0;
+const mockSetCount = jest.fn();
 const mockDoIncrease = jest.fn();
 const mockDoDecrease = jest.fn();
 jest.mock('../../../components/basket/basket_context', () => {
     return {
         useBasketContext: jest.fn(() => ({
+            count: mockCount,
+            setCount: mockSetCount,
             doIncrease: mockDoIncrease,
             doDecrease: mockDoDecrease
         }))
@@ -14,6 +18,11 @@ jest.mock('../../../components/basket/basket_context', () => {
 })
 
 describe('BasketAction', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+        mockCount = 0;
+    });
+
     it('increase and decrease count', async () => {
         render(
             <BasketAction />

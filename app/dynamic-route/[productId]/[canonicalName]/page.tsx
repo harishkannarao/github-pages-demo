@@ -1,5 +1,3 @@
-'use client';
-
 export default function RoutePage({ params }: { params: { productId: string, canonicalName: string } }) {
     return(
         <>

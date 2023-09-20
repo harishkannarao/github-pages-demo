@@ -1,14 +1,26 @@
-'use client';
+import ContextPage from './context_page'
+import { Metadata, ResolvingMetadata } from 'next'
 
-import { Basket } from "../../components/basket/basket";
-import { BasketAction } from "../../components/basket/basket_action";
+type Props = {
+    params: { id: string }
+    searchParams: { [key: string]: string | string[] | undefined }
+}
 
-export default function ContextPage() {
+export async function generateMetadata(
+    { params, searchParams }: Props,
+    parent: ResolvingMetadata
+): Promise<Metadata> {
+    // optionally access and extend (rather than replace) parent metadata
+    const parentKeywords = (await parent).keywords || []
+    const resolvedKeywords = parentKeywords.concat(['context', 'provider']);
+
+    return {
+        keywords: resolvedKeywords,
+    }
+}
+
+export default function ContextPageWrapper() {
     return (
-        <>
-            <div>Context Example</div>
-            <Basket></Basket>
-            <BasketAction></BasketAction>
-        </>
+        <ContextPage></ContextPage>
     )
 }
