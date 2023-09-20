@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
-import Page from '../../../app/dynamic-title/page'
+import TitlePage from '../../../app/dynamic-title/dynamic_title_page'
 import { usePathname } from "next/navigation";
 
 const mockPush = jest.fn();
@@ -42,7 +42,7 @@ describe('dynamic title page', () => {
         usePathname.mockReturnValue('example');
         mockToString.mockReturnValue('user=abc&query=xyz');
         render(
-            <Page />
+            <TitlePage />
         )
         fireEvent.change(screen.queryByTestId('new-title-query'), {target: {value: 'hello'}});
         expect(mockPush.mock.calls).toHaveLength(1);
@@ -54,7 +54,7 @@ describe('dynamic title page', () => {
         mockGet.mockReturnValue('existing');
         mockToString.mockReturnValue('user=abc&query=xyz&title=existing');
         render(
-            <Page />
+            <TitlePage />
         )
         fireEvent.change(screen.queryByTestId('new-title-query'), {target: {value: ''}});
         expect(mockGet.mock.calls).toHaveLength(1);
@@ -66,7 +66,7 @@ describe('dynamic title page', () => {
     it('set the title context on input change', async () => {
         contextTitle = 'some context title';
         render(
-            <Page />
+            <TitlePage />
         )
         expect(screen.queryByTestId('new-title-context').value).toBe('some context title');
         fireEvent.change(screen.queryByTestId('new-title-context'), {target: {value: 'hello'}});
