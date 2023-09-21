@@ -6,12 +6,10 @@ import { CustomThemeProviders } from '../components/theme/custom_theme_provider'
 import { ThemeChanger } from '../components/theme/theme_changer';
 import { CustomNav } from '../components/nav/nav';
 import { BasketContextProvider } from '../components/basket/basket_context';
-import { Metadata } from 'next'
+import { Metadata } from 'next';
+import { layoutMetadata } from './layout_metadata';
 
-export const metadata: Metadata = {
-  description: 'Demo site for showcasing github pages with next js and react',
-  keywords: ['next js', 'react'],
-}
+export const metadata: Metadata = layoutMetadata;
 
 export default function RootLayout({
   children,
