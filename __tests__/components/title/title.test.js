@@ -102,6 +102,6 @@ describe('time', () => {
         expect(pathName.textContent).toBe('context title');
 
         expect(mockGet.mock.calls.length).toBe(1);
-        expect(mockGet.mock.calls[0][0]).toBe('title');
+        expect(mockGet.mock.calls[0][0]).toBe('title123');
     })
 })
