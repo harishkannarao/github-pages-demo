@@ -61,3 +61,17 @@ CI mode
     export PORT=4000
 
     npm run all
+
+    npm run dev
+
+    npm run build_serve
+
+### Change context path for dev and testing
+
+    export NEXT_PUBLIC_BASE_PATH='/context-path'
+
+    npm run all
+
+    npm run dev
+
+    npm run build_serve

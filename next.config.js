@@ -1,7 +1,7 @@
 
 const path = require('path')
 
-const basePath = process.env.NEXT_BASE_PATH || ''
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 /**
  * @type {import('next').NextConfig}
