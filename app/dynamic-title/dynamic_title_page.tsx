@@ -2,12 +2,20 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useTitleContext } from '../../components/title/title_context';
+import { useEffect } from 'react';
 
 export default function TitlePage() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const titleContext = useTitleContext();
+
+  useEffect(() => {
+    return () => { 
+      // clears the title when this component is unmounted
+      titleContext.setTitle(undefined); 
+    };
+  }, []);
 
   // Get a new searchParams string by merging the current
   // searchParams with a provided key/value pair
