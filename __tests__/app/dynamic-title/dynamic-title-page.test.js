@@ -63,15 +63,19 @@ describe('dynamic title page', () => {
         expect(mockPush.mock.calls[0][0]).toBe('example?user=abc&query=xyz');
     })
 
-    it('set the title context on input change', async () => {
+    it('set the title context on input change and clears it when unmounted', async () => {
         contextTitle = 'some context title';
-        render(
+        const { unmount } = render(
             <TitlePage />
         )
         expect(screen.queryByTestId('new-title-context').value).toBe('some context title');
         fireEvent.change(screen.queryByTestId('new-title-context'), {target: {value: 'hello'}});
         expect(setContextTitle.mock.calls).toHaveLength(1);
         expect(setContextTitle.mock.calls[0][0]).toBe('hello');
+
+        unmount();
+        expect(setContextTitle.mock.calls).toHaveLength(2);
+        expect(setContextTitle.mock.calls[1][0]).toBe(undefined);
     })
 })
 
