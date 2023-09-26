@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { cleanup, render, screen, fireEvent } from '@testing-library/react'
 import TitlePage from '../../../app/dynamic-title/dynamic_title_page'
 import { usePathname } from "next/navigation";
 
@@ -20,62 +20,122 @@ jest.mock('next/navigation', () => {
     }
 })
 
-let contextTitle = undefined;
-const setContextTitle = jest.fn();
-jest.mock('../../../components/title/title_context', () => {
-    return {
-        useTitleContext: jest.fn(() => ({
-            title: contextTitle,
-            setTitle: setContextTitle
-        }))
-    }
-})
 
 describe('dynamic title page', () => {
     beforeEach(() => {
+
         jest.clearAllMocks();
-        contextTitle = undefined;
         usePathname.mockReturnValue('default');
+        mockGet.mockReturnValue(undefined);
+        mockToString.mockReturnValue(undefined);
     });
 
-    it('set the title search param on input change', async () => {
-        usePathname.mockReturnValue('example');
-        mockToString.mockReturnValue('user=abc&query=xyz');
+    afterEach(() => {
+        cleanup();
+    })
+
+    it('display default title', async () => {
         render(
             <TitlePage />
         )
-        fireEvent.change(screen.queryByTestId('new-title-query'), {target: {value: 'hello'}});
-        expect(mockPush.mock.calls).toHaveLength(1);
-        expect(mockPush.mock.calls[0][0]).toBe('example?user=abc&query=xyz&title=hello');
+        expect(global.window.document.title).toBe('My Sample Site');
     })
 
-    it('deletes the title search param for blank input', async () => {
+    it('display title from query', async () => {
         usePathname.mockReturnValue('example');
         mockGet.mockReturnValue('existing');
         mockToString.mockReturnValue('user=abc&query=xyz&title=existing');
         render(
             <TitlePage />
         )
+        expect(global.window.document.title).toBe('existing');
+        expect(screen.queryByTestId('new-title-query').value).toBe('existing');
+    })
+
+    it('display title from input when no title in query', async () => {
+        render(
+            <TitlePage />
+        )
+        expect(global.window.document.title).toBe('My Sample Site');
+        expect(screen.queryByTestId('new-title-query').value).toBe('');
+
+        fireEvent.change(screen.queryByTestId('new-title-context'), {target: {value: 'hello'}});
+        expect(global.window.document.title).toBe('hello');
+    })
+
+    it('display title from input when title in query', async () => {
+        usePathname.mockReturnValue('example');
+        mockGet.mockReturnValue('existing');
+        mockToString.mockReturnValue('user=abc&query=xyz&title=existing');
+
+        render(
+            <TitlePage />
+        )
+        expect(global.window.document.title).toBe('existing');
+        expect(screen.queryByTestId('new-title-query').value).toBe('existing');
+
+        fireEvent.change(screen.queryByTestId('new-title-context'), {target: {value: 'hello'}});
+        expect(global.window.document.title).toBe('hello');
+
+        fireEvent.change(screen.queryByTestId('new-title-context'), {target: {value: 'hello there'}});
+        expect(global.window.document.title).toBe('hello there');
+    })
+
+    it('adds title in query on input change', async () => {
+        usePathname.mockReturnValue('example');
+        mockGet.mockReturnValue(undefined);
+        mockToString.mockReturnValue('user=abc&query=xyz');
+
+        render(
+            <TitlePage />
+        )
+
+        fireEvent.change(screen.queryByTestId('new-title-query'), {target: {value: 'hello'}});
+        expect(mockPush.mock.calls).toHaveLength(1);
+        expect(mockPush.mock.calls[0][0]).toBe('example?user=abc&query=xyz&title=hello');
+    })
+
+    it('updates title in query on input change', async () => {
+        usePathname.mockReturnValue('example');
+        mockGet.mockReturnValue('hello');
+        mockToString.mockReturnValue('user=abc&query=xyz&title=hello');
+
+        render(
+            <TitlePage />
+        )
+
+        fireEvent.change(screen.queryByTestId('new-title-query'), {target: {value: 'hello_there'}});
+        expect(mockPush.mock.calls).toHaveLength(1);
+        expect(mockPush.mock.calls[0][0]).toBe('example?user=abc&query=xyz&title=hello_there');
+    })
+
+    it('deletes title in query on blank input', async () => {
+        usePathname.mockReturnValue('example');
+        mockGet.mockReturnValue('hello');
+        mockToString.mockReturnValue('user=abc&query=xyz&title=hello');
+
+        render(
+            <TitlePage />
+        )
+
         fireEvent.change(screen.queryByTestId('new-title-query'), {target: {value: ''}});
-        expect(mockGet.mock.calls).toHaveLength(1);
-        expect(mockGet.mock.calls[0][0]).toBe('title');
         expect(mockPush.mock.calls).toHaveLength(1);
         expect(mockPush.mock.calls[0][0]).toBe('example?user=abc&query=xyz');
     })
 
-    it('set the title context on input change and clears it when unmounted', async () => {
-        contextTitle = 'some context title';
+    it('sets title to default on unmount', async () => {
         const { unmount } = render(
             <TitlePage />
         )
-        expect(screen.queryByTestId('new-title-context').value).toBe('some context title');
+        expect(global.window.document.title).toBe('My Sample Site');
+        expect(screen.queryByTestId('new-title-query').value).toBe('');
+
         fireEvent.change(screen.queryByTestId('new-title-context'), {target: {value: 'hello'}});
-        expect(setContextTitle.mock.calls).toHaveLength(1);
-        expect(setContextTitle.mock.calls[0][0]).toBe('hello');
+        expect(global.window.document.title).toBe('hello');
 
         unmount();
-        expect(setContextTitle.mock.calls).toHaveLength(2);
-        expect(setContextTitle.mock.calls[1][0]).toBe(undefined);
+        expect(global.window.document.title).toBe('');
     })
+
 })
 
