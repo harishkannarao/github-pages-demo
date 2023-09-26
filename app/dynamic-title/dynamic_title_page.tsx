@@ -2,9 +2,9 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { defaultTitle } from '../metadata';
 
 export default function TitlePage() {
-  const defaultTitle = 'My Sample Site';
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -15,7 +15,7 @@ export default function TitlePage() {
     document.title = defaultTitle;
     return () => {
       // clears the title when this component is unmounted
-      document.title = '';
+      document.title = defaultTitle;
     };
   }, []);
 

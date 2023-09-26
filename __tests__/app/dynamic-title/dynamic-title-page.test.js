@@ -134,7 +134,7 @@ describe('dynamic title page', () => {
         expect(global.window.document.title).toBe('hello');
 
         unmount();
-        expect(global.window.document.title).toBe('');
+        expect(global.window.document.title).toBe('My Sample Site');
     })
 
 })
