@@ -17,6 +17,9 @@ export default function RootLayout({
   return (
     <BasketContextProvider>
       <html lang="en" suppressHydrationWarning>
+        <head>
+          <meta name="author" content="Harish Kannarao"></meta>
+        </head>
         <body className="container">
           <CustomThemeProviders>
             <CustomNav />
