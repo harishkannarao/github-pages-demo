@@ -35,9 +35,6 @@ describe('time', () => {
             <CurrentTime />
         )
 
-        const loadingMessage = screen.queryByTestId('current-time-loading');
-        expect(loadingMessage.textContent).toBe('Loading...');
-
         expect(await screen.findByTestId('current-time')).toBeInTheDocument();
         expect(screen.queryByTestId('current-time-loading')).not.toBeInTheDocument();
 

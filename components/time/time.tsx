@@ -10,15 +10,10 @@ export function CurrentTime() {
     const pathname = usePathname();
 
     useEffect(() => {
-        loadDate();
+        setDate(timeModule.currentTime());
         return () => { };
     }, []);
-
-    async function loadDate() {
-        const currentTime = await timeModule.currentTime();
-        setDate(currentTime);
-    };
-
+    
     function createDate() {
         if (date) {
             return (<span data-testid="current-time">{date.toISOString()}</span>);
