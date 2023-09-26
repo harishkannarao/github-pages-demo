@@ -7,7 +7,8 @@ describe('Layout', () => {
         expect(result.keywords).toHaveLength(2);
         expect(result.keywords).toContain('next js');
         expect(result.keywords).toContain('react');
-        expect(result.title).toBe('My Sample Site');
+        expect(result.title.template).toBe('%s | My Sample Site');
+        expect(result.title.default).toBe('My Sample Site');
     })
 
     it('verify home page metadata', async () => {
