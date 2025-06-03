@@ -10,9 +10,11 @@ Repository to learn and explore website using Github Pages
 
 ### Install node modules
 
+Install dependencies from package.json without updating package-lock.json
+
     npm ci
 
-or
+or Install dependencies from package.json by creating/updating package-lock.json
 
     npm install
 
